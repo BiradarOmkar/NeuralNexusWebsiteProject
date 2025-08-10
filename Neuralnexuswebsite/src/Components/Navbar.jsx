@@ -4,7 +4,7 @@ import { FiMenu,FiX } from "react-icons/fi";
 import { useState } from "react";
 function Navbar() {
   const pages = [
-    { name: "Home", path: "/home" },
+    { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Events", path: "/events" },
     { name: "Contact", path: "/contact" },

@@ -3,7 +3,7 @@ import event from "../model/EventModel.js";
 export const deleteEvent=async(req,res)=>{
     try{
          const eventid=req.params.id;
-         const deleteEvent=event.findByIdAndDelete(eventid);
+         const deleteEvent=await event.findByIdAndDelete(eventid);
          if(!deleteEvent){
             return res.status(404).json({ error: 'Event not found' });
          }
