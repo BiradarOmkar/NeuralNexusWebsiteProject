@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import event from "../../../../backend/model/EventModel";
 
 const API_URL = import.meta.env.VITE_API;
 function AddEvent() {
