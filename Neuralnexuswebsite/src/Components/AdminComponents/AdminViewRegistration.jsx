@@ -14,7 +14,7 @@ const AdminViewRegistration = () => {
 
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get(`/api/event-registrations/${id}`);
+      const res = await axios.get(`${API_URL}/event-registrations/${id}`);
       setRegistrations(res.data);
       setLoading(false);
     } catch (err) {

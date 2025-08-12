@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const API_URL = import.meta.env.VITE_API;
 const AdminEditEvent = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const AdminEditEvent = () => {
 
   const fetchEvent = async () => {
     try {
-      const res = await axios.get(`/api/getevents-id/${id}`);
+      const res = await axios.get(`${API_URL}/getevents-id/${id}`);
       const event = res.data;
 
       setEventData({
@@ -68,7 +68,7 @@ const AdminEditEvent = () => {
         ...eventData,
         tags: eventData.tags.split(',').map((tag) => tag.trim()), // Convert back to array
       };
-      await axios.put(`/api/editEvent/${id}`, updatedEvent);
+      await axios.put(`${API_URL}/editEvent/${id}`, updatedEvent);
       alert('Event updated successfully');
       navigate('/admindashboard/manage-events');
     } catch (err) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const API_URL = import.meta.env.VITE_API;
 const EventDetailsPage = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -11,7 +11,7 @@ const EventDetailsPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`/api/getevents-id/${id}`);
+        const res = await axios.get(`${API_URL}/getevents-id/${id}`);
         setEvent(res.data);
       } catch (error) {
         console.error("Failed to fetch event:", error);

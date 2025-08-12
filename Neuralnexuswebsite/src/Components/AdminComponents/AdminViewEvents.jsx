@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API;
 const AdminViewEvents = () => {
   const [events, setEvents] = useState([]);
   const [expandedEventId, setExpandedEventId] = useState(null);
@@ -13,7 +13,7 @@ const AdminViewEvents = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("/api/getevents");
+      const res = await axios.get(`${API_URL}/getevents`);
       const data = res.data;
       if (Array.isArray(data)) {
         setEvents(data);
@@ -29,7 +29,7 @@ const AdminViewEvents = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this event?")) return;
     try {
-      await axios.delete(`/api/deleteEvent/${id}`);
+      await axios.delete(`${API_URL}/deleteEvent/${id}`);
       alert("Event deleted successfully");
       fetchEvents();
     } catch (err) {

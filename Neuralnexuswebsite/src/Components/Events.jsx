@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+const API_URL = import.meta.env.VITE_API;
 const Events = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
@@ -13,7 +13,7 @@ const Events = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get('/api/getevents');
+      const res = await axios.get(`${API_URL}/getevents`);
       const now = new Date();
 
       const upcoming = [];
