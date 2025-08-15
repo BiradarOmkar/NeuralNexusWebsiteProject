@@ -11,7 +11,7 @@ function Navbar() {
   ];
   const [open, setopen] = useState(false);
   return (
-    <header className="bg-gray-900 text-white px-6 py-10shadow-md">
+    <header className="bg-gray-900 text-white px-6 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <h1 className="text-3xl  text-white font-bold">Neural Nexus</h1>
         {/* Desktop */}
