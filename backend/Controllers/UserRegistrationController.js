@@ -12,17 +12,24 @@ export const UserRegister=async(req,res)=>{
         year,
         department,
      }=req.body;
+   //   console.log(eventId);
      if(!fullName || !email || !phone || !college ||!year||!department){
         return res.status(404).json({message:"All Fields are required"});
      }
     //  check if event Exist or not
      const selectedEvent=await event.findById(eventId);
+     console.log('hello');
+     
+     console.log(selectedEvent);
+     
      if(!selectedEvent){
         return res.status(404).json({ message: "Event not found" });
      }
     //  Check for Limit 
     const registrationCount = await EventRegistration.countDocuments({ eventId });
-    if (registrationCount >= selectedEvent.maxParticipants) {
+    
+    if (registrationCount >= selectedEvent.maxParticipants) {  
+          
       return res.status(400).json({ message: "Participant limit reached" });
     }
 
