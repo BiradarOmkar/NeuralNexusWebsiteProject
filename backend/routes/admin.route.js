@@ -6,8 +6,8 @@ import { DeleteRegistration } from '../Controllers/AdminDeleteRegistrationContro
 import { editEvent } from '../Controllers/AdminEditEventController.js';
 import { getEvents } from '../Controllers/AdminViewEventController.js';
 import { geteventById } from '../Controllers/AdminViewSingleEvent.js';
-
-
+import adminLogin from '../Controllers/adminLogin.js';
+import adminCredentials from '../model/Admin.model.js';
 const router=Router();
 
 router.post("/addevent",addevent);
@@ -23,5 +23,26 @@ router.get("/getevents",getEvents);
 
 router.get("/getevents-id/:id",geteventById);
 
+router.post('/create',async (req,res) => {
+    const {email,password}=req.body
+    const adminU=new adminCredentials({
+        email,password
+    })
+    
+    await adminU.save()
+
+    res.status(200).json({success:'true',password:password,email:email})
+})
+router.get('/all', async (req, res) => {
+    try {
+        const adminU = await adminCredentials.find(); // Await the query
+        res.status(200).json(adminU); // Send actual data
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.post('/admin',adminLogin)
 
 export default router;

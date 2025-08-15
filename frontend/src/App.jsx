@@ -17,14 +17,16 @@ import AdminEditEvent from "./Components/AdminComponents/AdminEditEvent";
 import EventDetailsPage from "./pages/EventDetailsPage";
 import UserRegistrationForm from "./Components/UserRegistrationForm";
 import AdminViewRegistration from "./Components/AdminComponents/AdminViewRegistration";
+import useAdminAuth from "./store/useAdminAuth";
 function App() {
   const location = useLocation();
 
   const isAdminDashboard = location.pathname.startsWith("/admindashboard");
+  const {isAuth}=useAdminAuth()
   return (
     <>
       <div className="h-screen flex flex-col justify-between">
-        {!isAdminDashboard && <Navbar />}
+        {!isAuth  && <Navbar />}
         <div className="">
           <Routes>
             <Route path="/" element={<Home />}></Route>
@@ -39,7 +41,7 @@ function App() {
               path="/events/register/:id"
               element={<UserRegistrationForm />}
             ></Route>
-            <Route path="/admindashboard" element={<AdminDashBoard />}>
+            <Route path="/admindashboard" element={isAuth? <AdminDashBoard />:<Home/>}>
               <Route path="addevent" element={<AddEvent />}></Route>
               <Route path="manage-events" element={<AdminViewEvents />}></Route>
               <Route path="edit-event/:id" element={<AdminEditEvent />}></Route>
@@ -50,7 +52,7 @@ function App() {
             </Route>
           </Routes>
         </div>
-        {!isAdminDashboard && <Footer />}
+        {!isAuth && <Footer />}
       </div>
     </>
   );

@@ -2,23 +2,40 @@ import React from "react";
 import { useState } from "react";
 import { FiMail, FiLock } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import useAdminAuth from "../store/useAdminAuth";
 function AdminLogin() {
   const [email,setemail]=useState('');
   const [password,setpassword]=useState('');
 
   const navigate=useNavigate();
 
-  const Cemail="neuralnexus@gmail.com";
-  const Cpassword="neuralnexus";
-  // handle submit
-  const handlesubmit=(e)=>{
+  // const Cemail="neuralnexus@gmail.com";
+  // const Cpassword="neuralnexus";
+  // // handle submit
+  // const handlesubmit=(e)=>{
+  //    e.preventDefault();
+  //    if(email===Cemail && password===Cpassword){
+  //      navigate('/admindashboard');
+  //    }else{
+  //      alert("Please Check The Credentials");
+  //    }
+  // }
+
+  const {checkAuth,isAuth}=useAdminAuth()
+
+  const handlesubmit=async(e)=>{
+
      e.preventDefault();
-     if(email===Cemail && password===Cpassword){
-       navigate('/admindashboard');
-     }else{
-       alert("Please Check The Credentials");
-     }
+    const result=await checkAuth({email:email,password:password})
+    console.log(result);
+    
+    if(result){
+    navigate('/admindashboard');
+    }
+
   }
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 max-w-md w-full">
