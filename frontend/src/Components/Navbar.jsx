@@ -8,7 +8,6 @@ function Navbar() {
     { name: "About", path: "/about" },
     { name: "Events", path: "/events" },
     { name: "Contact", path: "/contact" },
-    { name: "Admin", path: "/admin" },
   ];
   const [open, setopen] = useState(false);
   return (

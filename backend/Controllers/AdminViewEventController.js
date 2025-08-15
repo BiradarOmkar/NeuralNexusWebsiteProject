@@ -4,7 +4,7 @@ import registration from "../model/UserRegistrationModel.js";
 export const getEvents = async (req, res) => {
   try {
     const events = await event.find(); // Fetch all events
-
+    
     // Add registeredCount to each event
     const eventsWithCount = await Promise.all(
       events.map(async (e) => {

@@ -17,7 +17,7 @@ function Footer() {
         <div>
           <h2 className="text-xl font-semibold mb-2">Quick Links</h2>
           <ul className="text-sm text-gray-400 space-y-1">
-            <li><a href="/home" className="hover:text-white">Home</a></li>
+            <li><a href="/" className="hover:text-white">Home</a></li>
             <li><a href="/about" className="hover:text-white">About</a></li>
             <li><a href="/events" className="hover:text-white">Events</a></li>
             <li><a href="/contact" className="hover:text-white">Contact</a></li>

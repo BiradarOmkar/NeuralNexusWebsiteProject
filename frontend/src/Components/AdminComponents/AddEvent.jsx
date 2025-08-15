@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_URL = import.meta.env.VITE_API;
+const API_URL = 'http://localhost:5002/api';
 function AddEvent() {
   const [formData, setFormData] = useState({
     title: "",

@@ -40,6 +40,8 @@ export const addevent=async(req,res)=>{
     })
     //  Save to DB
     await newEvent.save();
+    console.log(newEvent);
+    
      res.status(201).json({ message: "Event created successfully", event: newEvent });
    }catch(e){
        console.error("Error creating event:", e);
