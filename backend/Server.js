@@ -5,7 +5,7 @@ import cors from 'cors';
 import adminRoutes from './routes/admin.route.js'
 import userRegistrationRoute from './routes/UserRegistrationRoute.js';
 import getEventRegistrationsRoute from './routes/getEventRegistrationsRoute.js'
-
+import contactRoute from './routes/contactRoute.js'
 import userSubscribeRoute from './routes/UserSubscribeRoute.js'
 dotenv.config();
 
@@ -24,6 +24,8 @@ app.use("/api",adminRoutes);
 app.use("/api",userRegistrationRoute);
 app.use("/api",getEventRegistrationsRoute);
 app.use("/api",userSubscribeRoute);
+app.use("/api",contactRoute);
+
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{

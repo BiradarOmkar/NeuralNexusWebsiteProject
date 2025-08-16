@@ -64,7 +64,14 @@ const Events = () => {
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow text-white">
-          <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
+          <div className=" flex justify-between">
+            <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
+            {isUpcoming && (
+              <p className="inline-block px-3 py-1 m-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-semibold uppercase rounded-xl shadow-md transition-transform transform hover:scale-105">
+                Live
+              </p>
+            )}
+          </div>
           <p className="text-gray-300 mb-3 line-clamp-2">{event.description}</p>
           <p className="text-sm text-gray-400 mb-4">
             <strong>Date:</strong> {eventDate.toLocaleDateString()} |{" "}
@@ -101,8 +108,8 @@ const Events = () => {
           Explore Our Events
         </h1>
         <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-6 text-gray-300">
-          Stay updated with upcoming events, workshops, and sessions.  
-          Relive our past moments of learning and collaboration.
+          Stay updated with upcoming events, workshops, and sessions. Relive our
+          past moments of learning and collaboration.
         </p>
         <a
           href="#upcoming"
