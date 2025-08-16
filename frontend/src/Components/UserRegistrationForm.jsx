@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-const API_URL = "http://localhost:5002/api";
+const API_URL = import.meta.env.VITE_API;
 const UserRegistrationForm = () => {
   const { id: eventId } = useParams();
   const [formData, setFormData] = useState({

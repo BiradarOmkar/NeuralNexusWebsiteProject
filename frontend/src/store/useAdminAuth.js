@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_API;
 export const useAdminAuth = create((set, get) => ({
   isAuth: false,
 
@@ -9,7 +9,7 @@ export const useAdminAuth = create((set, get) => ({
       console.log("Sending auth request with:", body);
 
       const response = await axios.post(
-        "http://localhost:5002/api/admin",
+        `${API_URL}admin`,
         body
       );
 
