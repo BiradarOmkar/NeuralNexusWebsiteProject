@@ -9,7 +9,7 @@ export const useAdminAuth = create((set, get) => ({
       console.log("Sending auth request with:", body);
 
       const response = await axios.post(
-        `${API_URL}admin`,
+        `${API_URL}/admin`,
         body
       );
 
