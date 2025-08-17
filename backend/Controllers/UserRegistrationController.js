@@ -13,10 +13,11 @@ export const UserRegister=async(req,res)=>{
         college,
         year,
         department,
+        paymentId,
      }=req.body;
    
 
-     if(!fullName || !email || !phone || !college ||!year||!department){
+     if(!fullName || !email || !phone || !college ||!year||!department||!paymentId){
         return res.status(404).json({message:"All Fields are required"});
      }
     //  check if event Exist or not
@@ -49,6 +50,7 @@ export const UserRegister=async(req,res)=>{
         college,
         year,
         department,
+        paymentId
     })
     await newRegistration.save();
      await sendThankYouEmail(newRegistration.email, newRegistration.fullName, selectedEvent.title);

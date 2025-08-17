@@ -22,6 +22,7 @@ const AdminViewRegistration = () => {
       Contact: i.phone,
       year: i.year,
       College: i.college,
+      PaymentId:i.paymentId
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(filterRegistrations);
@@ -118,6 +119,7 @@ const AdminViewRegistration = () => {
                   <th className="border px-4 py-2">Year</th>
                   <th className="border px-4 py-2">Phone</th>
                   <th className="border px-4 py-2">College</th>
+                  <th className="border px-4 py-2">Payment Id</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,6 +131,7 @@ const AdminViewRegistration = () => {
                     <td className="border px-4 py-2">{reg.year}</td>
                     <td className="border px-4 py-2">{reg.phone}</td>
                     <td className="border px-4 py-2">{reg.college}</td>
+                    <td className="border px-4 py-2">{reg.paymentId}</td>
                     <td className="border px-4 py-2">
                       <button
                         onClick={() => {

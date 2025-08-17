@@ -13,6 +13,9 @@ const eventSchema = new mongoose.Schema({
   maxParticipants: { type: Number,
       default: Number.MAX_SAFE_INTEGER
    },
+  isPaid:{type:String , default:false},
+  amount:{type:Number,default : 0},
+  qrImage:{type:String,default:null},
   organizerEmail: { type: String }, 
   certificateAvailable: { type: Boolean, default: false }, 
   tags: [String],

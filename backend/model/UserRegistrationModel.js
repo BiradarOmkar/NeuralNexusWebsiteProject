@@ -9,6 +9,7 @@ const eventRegistrationSchema = new mongoose.Schema({
   college: String,
   year: String,
   department:String,
+  paymentId:String,
   registeredAt: { type: Date, default: Date.now }
 });
 

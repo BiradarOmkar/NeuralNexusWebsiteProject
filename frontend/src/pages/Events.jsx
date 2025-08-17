@@ -51,37 +51,41 @@ const Events = () => {
     return (
       <div
         key={event._id}
-        className="bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 w-full md:w-[48%] flex flex-col border border-gray-700"
+        className="bg-gray-900/60 backdrop-blur-md border border-gray-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex flex-col w-full md:w-[48%]"
       >
-        {/* Event Banner */}
+        {/* Banner */}
         {event.bannerImage && (
           <img
             src={event.bannerImage}
             alt={event.title}
-            className="w-full h-48 object-cover rounded-t-xl"
+            className="w-full h-52 object-cover"
           />
         )}
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow text-white">
-          <div className=" flex justify-between">
-            <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl sm:text-2xl font-bold">{event.title}</h3>
             {isUpcoming && (
-              <p className="inline-block px-3 py-1 m-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-semibold uppercase rounded-xl shadow-md transition-transform transform hover:scale-105">
+              <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-green-500 to-green-600 rounded-full shadow animate-pulse">
                 Live
-              </p>
+              </span>
             )}
           </div>
-          <p className="text-gray-300 mb-3 line-clamp-2">{event.description}</p>
-          <p className="text-sm text-gray-400 mb-4">
-            <strong>Date:</strong> {eventDate.toLocaleDateString()} |{" "}
-            {eventDate.toLocaleTimeString()}
+
+          <p className="text-gray-300 mt-2 mb-3 line-clamp-2">
+            {event.description}
           </p>
 
-          <div className="mt-auto flex gap-4">
+          <p className="text-sm text-gray-400 mb-6">
+            <span className="font-semibold">📅 Date:</span>{" "}
+            {eventDate.toLocaleDateString()} | {eventDate.toLocaleTimeString()}
+          </p>
+
+          <div className="mt-auto flex flex-wrap gap-3">
             <button
               onClick={() => navigate(`/events/${event._id}`)}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition"
             >
               View Details
             </button>
@@ -89,7 +93,7 @@ const Events = () => {
             {isUpcoming && isRegistrationOpen && (
               <button
                 onClick={() => navigate(`/events/register/${event._id}`)}
-                className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 transition"
+                className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg shadow hover:bg-green-700 transition"
               >
                 Register
               </button>
@@ -101,59 +105,62 @@ const Events = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-black min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-900 via-purple-900 to-black text-white py-20 text-center">
+      <section className="bg-gradient-to-r from-indigo-900 via-purple-900 to-black text-white py-20 text-center shadow-lg">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
-          Explore Our Events
+          🚀 Explore Our Events
         </h1>
-        <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-6 text-gray-300">
+        <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-8 text-gray-300">
           Stay updated with upcoming events, workshops, and sessions. Relive our
           past moments of learning and collaboration.
         </p>
         <a
           href="#upcoming"
-          className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold shadow transition"
+          className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-semibold shadow-md transition"
         >
           See Upcoming Events
         </a>
       </section>
 
       {/* Events Section */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-16">
         {data ? (
           <>
-            {/* Upcoming Events */}
-            <section id="upcoming" className="mb-16">
-              <h2 className="text-3xl font-bold text-white mb-8 text-center">
-                Upcoming Events
+            {/* Upcoming */}
+            <section id="upcoming" className="mb-20">
+              <h2 className="text-3xl font-bold text-white mb-10 text-center border-b border-gray-700 pb-3">
+                🌟 Upcoming Events
               </h2>
               {upcomingEvents.length > 0 ? (
                 <div className="flex flex-wrap justify-between gap-6">
                   {upcomingEvents.map((event) => renderEventCard(event, true))}
                 </div>
               ) : (
-                <p className="text-center text-gray-500">No upcoming events.</p>
+                <p className="text-center text-gray-500 italic">
+                  No upcoming events.
+                </p>
               )}
             </section>
-
-            {/* Past Events */}
-            <section className="bg-gray-900 py-12 px-6 rounded-xl shadow-inner border border-gray-800">
-              <h2 className="text-3xl font-bold text-white mb-8 text-center">
-                Past Events
+            {/* Past */}
+            <section className="bg-gray-900/40 backdrop-blur-md py-12 px-6 rounded-2xl border border-gray-700 shadow-inner">
+              <h2 className="text-3xl font-bold text-white mb-10 text-center border-b border-gray-700 pb-3">
+                📖 Past Events
               </h2>
               {pastEvents.length > 0 ? (
                 <div className="flex flex-wrap justify-between gap-6">
                   {pastEvents.map((event) => renderEventCard(event, false))}
                 </div>
               ) : (
-                <p className="text-center text-gray-500">No past events yet.</p>
+                <p className="text-center text-gray-500 italic">
+                  No past events yet.
+                </p>
               )}
             </section>
           </>
         ) : (
           <div className="flex justify-center items-center h-40">
-            <AiOutlineLoading3Quarters className="size-8 animate-spin text-blue-500" />
+            <AiOutlineLoading3Quarters className="size-10 animate-spin text-blue-500" />
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 const API_URL = import.meta.env.VITE_API;
 function AddEvent() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,9 @@ function AddEvent() {
     hasRegistration: true,
     registrationDeadline: "",
     maxParticipants: "",
+    isPaid: false,
+    amount: 0,
+    qrImage: null,
     organizerEmail: "",
     certificateAvailable: false,
     tags: "",
@@ -26,12 +29,38 @@ function AddEvent() {
     });
   };
 
+  // handle Qr
+const handleQrupload = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "NeuralNexusUploads");
+
+  try {
+    const res = await axios.post(
+      "https://api.cloudinary.com/v1_1/dgiomhyja/image/upload",
+      formData
+    );
+    return res.data.secure_url;
+  } catch (e) {
+    console.error("Cloudinary upload error:", e.response?.data || e.message);
+    alert("Failed to upload QR image.");
+    return null;
+  }
+};
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("API=",API_URL);
-    
+    console.log("API=", API_URL);
+  //  handle qr uploads
+  let qrUrl=formData.qrImage;
+  if(formData.isPaid && formData.qrImage){
+    qrUrl=await handleQrupload(formData.qrImage);
+  }
+  
     const dataToSend = {
       ...formData,
+      qrImage:qrUrl,
       tags: formData.tags.split(",").map((tag) => tag.trim()),
     };
 
@@ -43,7 +72,7 @@ function AddEvent() {
         },
         body: JSON.stringify(dataToSend),
       });
-      const result = response.json();
+      const result = await response.json();
       console.log("Event Created", result);
       alert("Event Succcessfully Created");
       setFormData({
@@ -57,13 +86,16 @@ function AddEvent() {
         hasRegistration: true,
         registrationDeadline: "",
         maxParticipants: "",
+        isPaid: false,
+        amount: 0,
+        qrImage: null,
         organizerEmail: "",
         certificateAvailable: false,
         tags: "",
       });
     } catch (e) {
-         console.error("Error adding event:", e);
-         alert("Something went wrong. Please try again.");
+      console.error("Error adding event:", e);
+      alert("Something went wrong. Please try again.");
     }
 
     console.log("Submitting form:", dataToSend);
@@ -180,7 +212,48 @@ function AddEvent() {
             />
           </>
         )}
-
+        {/* is Paid */}
+        <div className="">
+          <input
+            type="checkbox"
+            name="isPaid"
+            checked={formData.isPaid}
+            onChange={handleChange}
+            className="border px-3 py-2 m-2 rounded"
+            placeholder="Registration Amount"
+          />
+          <label>Is it Paid Event ?</label>
+        </div>
+        {formData.isPaid && (
+          <>
+            <input
+              type="Number"
+              name="amount"
+              onChange={handleChange}
+              value={formData.amount}
+              placeholder="Enter Registration Amount"
+              className="w-full border px-3 py-2 rounded"
+            />
+            {/* Qr Image */}
+            <div className="mb-4">
+              <label className="block mb-1 font-medium">Upload QR Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  let file = e.target.files[0];
+                  if (file) {
+                    setFormData({ ...formData, qrImage: file });
+                  } else {
+                    setFormData({ ...formData, qrImage: null });
+                  }
+                }}
+                className="border px-3 py-2 rounded w-full"
+                required
+              />
+            </div>
+          </>
+        )}
         {/* Organizer Email */}
         <input
           type="email"

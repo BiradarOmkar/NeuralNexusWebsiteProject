@@ -25,7 +25,7 @@ function App() {
   const {isAuth}=useAdminAuth()
   return (
     <>
-      <div className="h-screen flex flex-col justify-between">
+      <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         {!isAuth  && <Navbar />}
         <div className="">
           <Routes>
