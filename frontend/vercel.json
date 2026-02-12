@@ -1,5 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.nncbit.club/",
+      "permanent": true
+    }
   ]
 }
